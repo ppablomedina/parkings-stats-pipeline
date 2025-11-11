@@ -1,4 +1,3 @@
-from current_month import days_in_month
 from gcp.utils import parkings_current_info
 
 
@@ -8,7 +7,7 @@ def main(all_events):
 
     for _, [parking_id, _, plazas, _] in parkings_current_info.items():
         
-        dias_de_servicio           = days_in_month
+        dias_de_servicio           = get_metric(all_events, parking_id, "Días de servicio")
         oferta_servicio_plazas_año = dias_de_servicio  * plazas
         oferta_servicio_horas_año  = dias_de_servicio  * plazas * 24
 

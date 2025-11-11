@@ -12,7 +12,6 @@ TABLE_STATES   = f'{DATASET}.states'
 # Cloud Storage
 BUCKET_NAME        =  'sagulpa-datalake'
 PATH_DATALAKE_DOCS =  'parkings-off_street/documents'
-PATH_INBOX         = f'parkings-off_street/inbox/{date}'
 PATH_OPEN_DATA     =  'parkings-off_street/open_data'
 
 

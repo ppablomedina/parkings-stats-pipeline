@@ -6,24 +6,30 @@ from gcp.utils import read, upload_files_to_gcs, parkings_current_info
 
 
 def main():
+
     events = []
     registros = []
 
     for parking_name, [parking_id, _, _, parking_norm] in parkings_current_info.items():
+
         df_a, h_a = get_data(parking_norm, 1, clean_abonados)
         df_r, h_r = get_data(parking_norm, 2, clean_rotacion)
 
         registros.append(build_records(df_a, parking_id, parking_name, 'ABONADO'))
         registros.append(build_records(df_r, parking_id, parking_name, 'ROTACIÓN'))
 
+        dias_servicio = get_dias_servicio(df_r)
+
         events += [
             [parking_id, {'Horas Abonados': h_a}],
             [parking_id, {'Horas Rotación': h_r}],
+            [parking_id, {'Días de servicio': dias_servicio}],
         ]
 
     all_rec = pd.concat(registros, ignore_index=True)
+
     create_transparencia(all_rec, path_transparencia)
-    
+
     return events
 
 
@@ -140,3 +146,8 @@ def create_transparencia(records, output_path_gcs):
         output_path_gcs: local_path,
         output_path_gcs.replace('.xlsx', '_WEB.xlsx'): web_path
     })
+
+
+def get_dias_servicio(df_rotacion):
+    dias = df_rotacion['Time'].dt.date.nunique()
+    return dias

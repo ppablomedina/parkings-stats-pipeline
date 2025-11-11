@@ -1,6 +1,6 @@
-from gcp.paths import BUCKET_NAME, PATH_INBOX, TABLE_EVENTS, TABLE_SUBJECTS, TABLE_STATES
+from gcp.paths import BUCKET_NAME, TABLE_EVENTS, TABLE_SUBJECTS, TABLE_STATES
 from google.cloud import storage, bigquery
-from current_month import date, year, n_month_int, date_to_delete
+from current_month import year, n_month_int
 from PyPDF2 import PdfReader
 import pandas as pd
 import io
@@ -25,21 +25,6 @@ def upload_files_to_gcs(files_map):
 
     for blob_path, local_path in files_map.items():
         bucket.blob(blob_path).upload_from_filename(local_path)
-
-def move_blob(bucket, from_inbox, to_datalake):
-    """Copia y borra un archivo en GCS (simula un rename)."""
-    blob = bucket.blob(from_inbox)
-    bucket.copy_blob(blob, bucket, to_datalake)
-    blob.delete()
-
-def delete_previous_version(bucket, path, yearly=False):
-    """Elimina la versión del mes anterior del archivo (si existe)."""
-    prev_path = path.replace(date, date_to_delete)
-    prev_blob = bucket.blob(prev_path)
-
-    if prev_blob.exists():
-        if not (yearly and n_month_int == 1):
-            prev_blob.delete()
 
 def insert_events(events):
     client = bigquery.Client()
@@ -72,21 +57,15 @@ def get_current_info():
       ON p.states_id = a.id
     WHERE a.is_open = true
     """
-    df = client.query(query).to_dataframe()
 
+    df = client.query(query).result().to_dataframe(
+        bqstorage_client=None,
+        create_bqstorage_client=False,
+    )
+    
     return {
         row['name']: [row['id_subjects'], row['sagulpa_id'], row['num_spaces'], row['name_norm']]
         for _, row in df.iterrows()
     }
-
-def get_bucket():
-    client = storage.Client()
-    bucket = client.bucket(BUCKET_NAME)
-    return bucket
-
-def get_blobs(bucket):
-    """Devuelve una lista de blobs en el bucket."""
-    blobs = [blob for blob in bucket.list_blobs(prefix=PATH_INBOX) if blob.size > 0]
-    return blobs
 
 parkings_current_info = get_current_info()
