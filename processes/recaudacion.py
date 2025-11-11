@@ -1,5 +1,4 @@
-from current_month import w_month, year
-from gcp.paths import path_recaudacion as ss
+from gcp.paths import path_recaudacion as ss, w_month, year
 from gcp.utils import read, parkings_current_info
 
 

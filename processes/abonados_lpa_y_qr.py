@@ -1,6 +1,5 @@
 import pandas as pd
-from current_month import n_month_int 
-from gcp.paths import path_abonos_lpa_y_qr as ss
+from gcp.paths import path_abonos_lpa_y_qr as ss, n_month
 from gcp.utils import read, parkings_current_info
 
 
@@ -21,7 +20,7 @@ def main():
             
             df['Fecha'] = pd.to_datetime(df['Fecha'], errors='coerce')
 
-            df = df[df['Fecha'].dt.month == n_month_int]
+            df = df[df['Fecha'].dt.month == n_month]
 
             mask = df['Descripción'].str.contains(parking_name.upper(), na=False)
             df_parking = df[mask]

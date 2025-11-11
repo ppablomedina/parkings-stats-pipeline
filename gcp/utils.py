@@ -1,6 +1,5 @@
-from gcp.paths import BUCKET_NAME, TABLE_EVENTS, TABLE_SUBJECTS, TABLE_STATES
+from gcp.paths import BUCKET_NAME, TABLE_EVENTS, TABLE_SUBJECTS, TABLE_STATES, year, n_month
 from google.cloud import storage, bigquery
-from current_month import year, n_month_int
 from PyPDF2 import PdfReader
 import pandas as pd
 import io
@@ -33,7 +32,7 @@ def insert_events(events):
     for i, (parking_id, pairs) in enumerate(events):
         for metric, value in pairs.items():
             row = {
-                'date': f'{year}-{n_month_int:02}-01 00:00:00',
+                'date': f'{year}-{n_month:02}-01 00:00:00',
                 'subjects_id': parking_id,
                 'metric': metric,
                 'value': round(value, 2) if isinstance(value, (int, float)) else None,

@@ -1,6 +1,5 @@
 import pandas as pd
-from current_month import year, n_month_int
-from gcp.paths import path_abonados_en_banco as ss
+from gcp.paths import path_abonados_en_banco as ss, year, n_month
 from gcp.utils import read, parkings_current_info
 
 
@@ -26,7 +25,7 @@ def main():
 
             for i in range(n_parkings):
                 row_p_name = 2 + (i * 15)
-                row_value = row_p_name + n_month_int
+                row_value = row_p_name + n_month
 
                 p = sheet.iloc[row_p_name, 1]
                 if p != parking_name: continue
