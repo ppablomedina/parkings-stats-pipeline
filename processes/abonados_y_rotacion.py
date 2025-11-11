@@ -1,8 +1,8 @@
-import pandas as pd
-from openpyxl import load_workbook
-from openpyxl.styles import Font, PatternFill, Alignment
 from gcp.paths import path_abonados, path_rotacion, path_transparencia
 from gcp.utils import read, upload_files_to_gcs, parkings_current_info
+from openpyxl import load_workbook
+from openpyxl.styles import Font, PatternFill, Alignment
+import pandas as pd
 
 
 def main():

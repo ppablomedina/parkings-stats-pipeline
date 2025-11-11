@@ -1,7 +1,6 @@
-import pandas as pd
-from gcp.paths import path_abonos_lpa_y_qr as ss, n_month
+from gcp.paths import n_month, path_abonos_lpa_y_qr as ss
 from gcp.utils import read, parkings_current_info
-
+import pandas as pd
 
 def main():
 

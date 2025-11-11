@@ -1,6 +1,6 @@
-import pandas as pd
-from gcp.paths import path_abonados_en_banco as ss, year, n_month
+from gcp.paths import year, n_month, path_abonados_en_banco as ss
 from gcp.utils import read, parkings_current_info
+import pandas as pd
 
 
 SHEETS = {

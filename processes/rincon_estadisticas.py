@@ -1,4 +1,4 @@
-from gcp.paths import path_rincon_estadisticas as ss, w_month, year
+from gcp.paths import w_month, year, path_rincon_estadisticas as ss
 from gcp.utils import read
 
 
