@@ -1,0 +1,8 @@
+pandas
+db-dtypes
+openpyxl
+xlrd
+lxml
+PyPDF2
+google-cloud-storage
+google-cloud-bigquery
