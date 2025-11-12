@@ -10,9 +10,9 @@ def entry_point(req):
         processes.abonados_en_banco,
         processes.recaudacion,
         processes.rincon_estadisticas,
-        processes.abonados_lpa_y_qr,
-        processes.informes_filtrados,
-        processes.abonados_y_rotacion,
+        # processes.abonados_lpa_y_qr,
+        # processes.informes_filtrados,
+        # processes.abonados_y_rotacion,
     ]
     all_events = []
     for module in modules:
