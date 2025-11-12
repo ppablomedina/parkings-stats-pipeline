@@ -22,7 +22,7 @@ def main():
             df = df[df['Fecha'].dt.month == n_month]
 
             mask = df['Descripción'].str.contains(parking_name.upper(), na=False)
-            df_parking = df[mask]
+            df_parking = df[mask].copy()
 
             operaciones = len(df_parking)
             if operaciones == 0: continue

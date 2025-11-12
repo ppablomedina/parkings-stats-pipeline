@@ -32,7 +32,6 @@ def main():
 
     return events
 
-
 def get_data(parking, tipo, clean_func):
     ss = path_abonados if tipo == 1 else path_rotacion
     ss = ss.replace('&', parking)
@@ -41,7 +40,6 @@ def get_data(parking, tipo, clean_func):
     horas = clean['tiempo'].sum()
     return clean, horas
 
-
 def clean_rotacion(df):
     df = df.loc[df['MovementType'] == 1].copy()
     df['Time'] = pd.to_datetime(df['Time'])
@@ -49,7 +47,6 @@ def clean_rotacion(df):
     df = df.sort_values('Time')
     df['tiempo'] = (df['Time'] - df['PaidFrom']).dt.total_seconds() / 3600
     return df[['Time', 'PaidFrom', 'tiempo']]
-
 
 def clean_abonados(df):
     df = df.sort_values(['UserNo', 'Time']).reset_index(drop=True)
@@ -72,7 +69,6 @@ def clean_abonados(df):
     df['tiempo'] = (df['Time'] - df['Entrada']).dt.total_seconds() / 3600
     return df[['Time', 'Entrada', 'tiempo']]
 
-
 def build_records(df, gid, parking, tipo):
     lbl = 'SAN BERNARDO' if parking == 'SB' else parking.upper()
     ent = pd.DataFrame({
@@ -89,7 +85,6 @@ def build_records(df, gid, parking, tipo):
     out['GarageNo'] = gid
     out['APARCAMIENTO'] = lbl
     return out
-
 
 def create_transparencia(records, output_path_gcs):
     local_path = '/tmp/temp_transparencia.xlsx'
@@ -146,7 +141,6 @@ def create_transparencia(records, output_path_gcs):
         output_path_gcs: local_path,
         output_path_gcs.replace('.xlsx', '_WEB.xlsx'): web_path
     })
-
 
 def get_dias_servicio(df_rotacion):
     dias = df_rotacion['Time'].dt.date.nunique()

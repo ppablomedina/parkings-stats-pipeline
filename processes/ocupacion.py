@@ -27,6 +27,4 @@ def main():
             'Plazas libres SD': [int(v) for v in values_sd]
         }])
 
-    print(events)
-
     return events
