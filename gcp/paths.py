@@ -18,7 +18,7 @@ prev    = pd.Timestamp.now() - pd.DateOffset(months=1)
 n_month = prev.month
 year    = prev.year
 date    = prev.strftime("%Y%m")
-w_month = prev.month_name(locale="es_ES")   
+w_month = "Octubre"
 
 path_abonados_en_banco   = f'{PATH_DATALAKE_DOCS}/{year}/financiero.abonados-en-banco'      + f'/{date}.xlsx'
 path_recaudacion         = f'{PATH_DATALAKE_DOCS}/{year}/financiero.recaudacion'            + f'/{date}.xls'
