@@ -19,7 +19,7 @@ def entry_point(req):
         feeds = module.main()
         all_events.extend(feeds)
 
-    insert_events(processes.ratios.main(all_events))
+    # insert_events(processes.ratios.main(all_events))
     return "ETL ejecutado correctamente\n", 200
 
 # --- WSGI app para Gunicorn ---
