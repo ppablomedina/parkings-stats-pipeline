@@ -8,17 +8,17 @@ def entry_point(req):
         processes.ocupacion,
         processes.abonados_en_banco,
         processes.recaudacion,
-        processes.rincon_estadisticas,
-        processes.abonados_lpa_y_qr,
-        processes.informes_filtrados,
-        processes.abonados_y_rotacion,
+        # processes.rincon_estadisticas,
+        # processes.abonados_lpa_y_qr,
+        # processes.informes_filtrados,
+        # processes.abonados_y_rotacion,
     ]
     all_events = []
     for module in modules:
         feeds = module.main()
         all_events.extend(feeds)
 
-    insert_events(processes.ratios.main(all_events))
+    # insert_events(processes.ratios.main(all_events))
     return "ETL ejecutado correctamente\n", 200
 
 app = Flask(__name__)
