@@ -2,7 +2,7 @@ import processes.ocupacion, processes.abonados_en_banco, processes.abonados_lpa_
 from gcp.utils import insert_events
 
 
-def hello_http(request):
+def entry_point(request):
 
     modules = [
         processes.ocupacion,
