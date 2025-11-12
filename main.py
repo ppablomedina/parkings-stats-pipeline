@@ -1,9 +1,8 @@
-from flask import Flask, request
-
 import processes.ocupacion, processes.abonados_en_banco, processes.abonados_lpa_y_qr, processes.recaudacion, processes.rincon_estadisticas, processes.abonados_y_rotacion, processes.informes_filtrados, processes.ratios
 from gcp.utils import insert_events
+from flask import Flask, request
 
-# --- tu entry_point original ---
+
 def entry_point(req):
     modules = [
         processes.ocupacion,
@@ -27,9 +26,4 @@ app = Flask(__name__)
 
 @app.route("/", methods=["GET", "POST"])
 def run():
-    # Pasa el objeto request de Flask a tu función
     return entry_point(request)
-
-# @app.get("/healthz")
-# def healthz():
-#     return "ok", 200
