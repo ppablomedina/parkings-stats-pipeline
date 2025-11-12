@@ -12,8 +12,6 @@ def main():
 
     for _, [parking_id, id_internal, plazas, _] in parkings_current_info.items():
 
-        if parking_id == 8: continue
-
         df_p_ld, df_p_lv, df_p_sd = df_ld[df_ld['ID Aparcamiento'] == id_internal], df_lv[df_lv['ID Aparcamiento'] == id_internal], df_sd[df_sd['ID Aparcamiento'] == id_internal]
 
         values_ld, values_lv, values_sd = [], [], []
