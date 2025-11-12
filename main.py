@@ -7,12 +7,12 @@ from gcp.utils import insert_events
 def entry_point(req):
     modules = [
         processes.ocupacion,
-        processes.abonados_en_banco,
-        processes.recaudacion,
-        processes.rincon_estadisticas,
-        processes.abonados_lpa_y_qr,
-        processes.informes_filtrados,
-        processes.abonados_y_rotacion,
+        # processes.abonados_en_banco,
+        # processes.recaudacion,
+        # processes.rincon_estadisticas,
+        # processes.abonados_lpa_y_qr,
+        # processes.informes_filtrados,
+        # processes.abonados_y_rotacion,
     ]
     all_events = []
     for module in modules:
@@ -30,6 +30,6 @@ def run():
     # Pasa el objeto request de Flask a tu función
     return entry_point(request)
 
-@app.get("/healthz")
-def healthz():
-    return "ok", 200
+# @app.get("/healthz")
+# def healthz():
+#     return "ok", 200
